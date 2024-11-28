@@ -142,4 +142,55 @@ class LinkedListTabulatedFunctionTest {
 
         assertEquals(5, test2.rightBound(), 1e-9);
     }
+
+    @Test
+    void testToString() {
+        double[] xArr = {0.0, 1.0, 2.0};
+        double[] yArr = {3.0, 4.0, 5.0};
+        LinkedListTabulatedFunction test = new LinkedListTabulatedFunction(xArr, yArr);
+
+        assertEquals("[ (0.0 ; 3.0), (1.0 ; 4.0), (2.0 ; 5.0) ]", test.toString());
+    }
+
+    @Test
+    void testEquals() {
+        double[] xArr = {0.0, 1.0, 2.0};
+        double[] yArr = {3.0, 4.0, 5.0};
+        LinkedListTabulatedFunction testArr1 = new LinkedListTabulatedFunction(xArr, yArr);
+
+        double[] xArr2 = {0.0, 1.0, 2.0};
+        double[] yArr2 = {3.0, 4.0, 5.0};
+        LinkedListTabulatedFunction testArr2 = new LinkedListTabulatedFunction(xArr2, yArr2);
+
+        double[] xArr3 = {0.0, 21.0, 32.0};
+        double[] yArr3 = {3.0, 12.0, 42.0};
+        LinkedListTabulatedFunction testArr3= new LinkedListTabulatedFunction(xArr3, yArr3);
+
+        IdentityFunction test4 = new IdentityFunction();
+
+        assertEquals(true, testArr1.equals(testArr2));
+        assertEquals(false, testArr1.equals(testArr3));
+        assertEquals(false, testArr2.equals(testArr3));
+        assertEquals(false, testArr1.equals(test4));
+    }
+
+    @Test
+    void testHashCode() {
+        double[] xArr = {0.0, 21.0, 32.0};
+        double[] yArr = {3.0, 12.0, 42.0};
+        LinkedListTabulatedFunction testArr= new LinkedListTabulatedFunction(xArr, yArr);
+
+        assertEquals(38, testArr.hashCode());
+    }
+
+    @Test
+    void testClone() {
+        double[] xValues = {0.0, 1.0, 2.0};
+        double[] yValues = {3.0, 4.0, 5.0};
+        LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);
+        LinkedListTabulatedFunction clonedFunction = function.clone();
+
+        assertEquals(function, clonedFunction);
+        assertNotSame(function, clonedFunction);
+    }
 }

@@ -20,7 +20,7 @@ class Node implements Cloneable{
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         Node other = (Node) o;
-        return (this.x == other.x) && (this.y == other.y);
+        return Double.compare(this.x, other.x) == 0 && Double.compare(this.y, other.y) == 0;
     }
 
     @Override

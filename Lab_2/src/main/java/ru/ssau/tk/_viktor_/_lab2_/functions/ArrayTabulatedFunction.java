@@ -121,12 +121,17 @@ public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implement
     @Override
     public String toString(){
         String res = "";
+        if(count == 0){
+            return "[]";
+        }
+        res += "[ ";
         for (int i = 0; i < count; i++){
             res += "(" + xValues[i] + " ; " + yValues[i] + ")";
             if (i < count - 1) {
                 res += ", ";
             }
         }
+        res += " ]";
         return res;
     }
 

@@ -43,8 +43,8 @@ class NodeTest {
 
         Node test = new Node(tempX, tempY);
         Node result = test.clone();
-        assertEquals(true, test.equals(result));
-        assertEquals("(1.5 ; 3.2)", test.toString());
+        assertEquals(result, test);
+        assertNotSame(result, test);
     }
 
 }

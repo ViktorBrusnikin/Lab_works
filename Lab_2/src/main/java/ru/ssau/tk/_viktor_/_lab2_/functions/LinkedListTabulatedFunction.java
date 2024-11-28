@@ -1,6 +1,6 @@
 package ru.ssau.tk._viktor_._lab2_.functions;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
     private Node head;
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues){
@@ -156,5 +156,73 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction{
     @Override
     public double rightBound() {
         return head.prev.x;
+    }
+
+    @Override
+    public String toString(){
+        String res = "";
+        Node cur = head;
+        if (cur == null) {
+            return "[]";
+        }
+        res += "[ ";
+        do {
+            res += cur.toString();
+            cur = cur.next;
+            if (cur != head) {
+                res += ", ";
+            }
+        } while (cur != head);
+        res += " ]";
+        return res;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LinkedListTabulatedFunction that = (LinkedListTabulatedFunction)o;
+        if(this.count != that.count) return false;
+
+        Node cur1 = this.head;
+        Node cur2 = that.head;
+        for (int i = 0; i < count; i++){
+            if (!cur1.equals(cur2)) return false;
+            cur1 = cur1.next;
+            cur2 = cur2.next;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode(){
+        Node cur = head;
+        int res = 0;
+        if (cur == null) return 0;
+        do{
+            res += cur.hashCode();
+            cur = cur.next;
+        }while (cur != head);
+        return res;
+    }
+
+    @Override
+    public LinkedListTabulatedFunction clone(){
+        if (head == null) {
+            return new LinkedListTabulatedFunction(new double[0], new double[0]);
+        }
+
+        Node cur = head;
+        double[] xVal = new double[count];
+        double[] yVal = new double[count];
+
+        for (int i = 0; i < count; i++) {
+            xVal[i] = cur.x;
+            yVal[i] = cur.y;
+            cur = cur.next;
+        }
+
+        return new LinkedListTabulatedFunction(xVal, yVal);
     }
 }
