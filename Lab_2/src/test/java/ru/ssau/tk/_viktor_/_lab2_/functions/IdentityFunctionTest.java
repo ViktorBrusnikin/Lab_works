@@ -3,6 +3,7 @@ package ru.ssau.tk._viktor_._lab2_.functions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 class IdentityFunctionTest {
 
@@ -42,9 +43,9 @@ class IdentityFunctionTest {
 
     @Test
     void testClone() {
-        IdentityFunction obj1 = new IdentityFunction();
-        IdentityFunction obj2 = obj1.clone();
-
-        assertEquals(obj1, obj2);
+        IdentityFunction function1 = new IdentityFunction();
+        IdentityFunction function2 = function1.clone();
+        assertEquals(function1, function2);
+        assertNotSame(function1, function2);
     }
 }

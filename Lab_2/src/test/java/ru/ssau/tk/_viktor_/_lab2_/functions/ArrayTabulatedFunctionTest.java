@@ -8,11 +8,10 @@ class ArrayTabulatedFunctionTest {
 
     @Test
     void getCount() {
-        double[] xArr = {0.0, 1.2, 4.0};
-        double[] yArr = {0.0, 4.3, 1.0};
-        ArrayTabulatedFunction testArr= new ArrayTabulatedFunction(xArr, yArr);
+        MathFunction func = new SqrFunction();
+        ArrayTabulatedFunction test = new ArrayTabulatedFunction(func,0,10,10);
 
-        assertEquals(3, testArr.getCount(), 1e-9);
+        assertEquals(10, test.getCount(), 1e-9);
     }
 
     @Test
@@ -119,5 +118,56 @@ class ArrayTabulatedFunctionTest {
         ArrayTabulatedFunction testArr= new ArrayTabulatedFunction(xArr, yArr);
 
         assertEquals(4.0, testArr.rightBound(), 1e-9);
+    }
+
+    @Test
+    void testToString() {
+        double[] xArr = {0.0, 1.0, 2.0};
+        double[] yArr = {3.0, 4.0, 5.0};
+        ArrayTabulatedFunction testArr= new ArrayTabulatedFunction(xArr, yArr);
+
+        assertEquals("(0.0 ; 3.0), (1.0 ; 4.0), (2.0 ; 5.0)", testArr.toString());
+    }
+
+    @Test
+    void testEquals() {
+        double[] xArr1 = {0.0, 1.0, 2.0};
+        double[] yArr1 = {3.0, 4.0, 5.0};
+        ArrayTabulatedFunction testArr1 = new ArrayTabulatedFunction(xArr1, yArr1);
+
+        double[] xArr2 = {0.0, 1.0, 2.0};
+        double[] yArr2 = {3.0, 4.0, 5.0};
+        ArrayTabulatedFunction testArr2 = new ArrayTabulatedFunction(xArr2, yArr2);
+
+        double[] xArr3 = {0.0, 21.0, 32.0};
+        double[] yArr3 = {3.0, 12.0, 42.0};
+        ArrayTabulatedFunction testArr3= new ArrayTabulatedFunction(xArr3, yArr3);
+
+        IdentityFunction test4 = new IdentityFunction();
+
+        assertEquals(true, testArr1.equals(testArr2));
+        assertEquals(false, testArr1.equals(testArr3));
+        assertEquals(false, testArr2.equals(testArr3));
+        assertEquals(false, testArr1.equals(test4));
+    }
+
+    @Test
+    void testHashCode() {
+        double[] xArr = {0.0, 21.0, 32.0};
+        double[] yArr = {3.0, 12.0, 42.0};
+        ArrayTabulatedFunction testArr= new ArrayTabulatedFunction(xArr, yArr);
+
+        assertEquals(38, testArr.hashCode());
+    }
+
+    @Test
+    void testClone() {
+        double[] xValues = {0.0, 1.0, 2.0};
+        double[] yValues = {3.0, 4.0, 5.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
+        ArrayTabulatedFunction clonedFunction = function.clone();
+
+        assertEquals(function, clonedFunction);
+        assertNotSame(function, clonedFunction);
     }
 }

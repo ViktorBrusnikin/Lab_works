@@ -3,7 +3,7 @@ package ru.ssau.tk._viktor_._lab2_.functions;
 
 import java.util.Arrays;
 
-public class ArrayTabulatedFunction  extends AbstractTabulatedFunction  {
+public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implements Cloneable {
 
     private double[] xValues;
     private double[] yValues;
@@ -116,5 +116,54 @@ public class ArrayTabulatedFunction  extends AbstractTabulatedFunction  {
     @Override
     public double rightBound() {
         return xValues[count-1];
+    }
+
+    @Override
+    public String toString(){
+        String res = "";
+        for (int i = 0; i < count; i++){
+            res += "(" + xValues[i] + " ; " + yValues[i] + ")";
+            if (i < count - 1) {
+                res += ", ";
+            }
+        }
+        return res;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ArrayTabulatedFunction that = (ArrayTabulatedFunction) o;
+        if (this.count != that.count) return false;
+
+        for (int i = 0; i < count; i++) {
+            if (this.xValues[i] != that.xValues[i] || this.yValues[i] != that.yValues[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode(){
+        int res = 0;
+        for (int i = 0; i < count; i++){
+            res += (int)this.xValues[i] ^ (int)this.yValues[i];
+        }
+        return res;
+    }
+
+    @Override
+    public ArrayTabulatedFunction  clone(){
+        double[] xVal = new double[count];
+        double[] yVal = new double[count];
+        for (int i = 0; i < count; i++){
+            xVal[i] = this.xValues[i];
+            yVal[i] = this.yValues[i];
+        }
+        ArrayTabulatedFunction result = new ArrayTabulatedFunction(xVal, yVal);
+        return result;
     }
 }
