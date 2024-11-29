@@ -193,4 +193,45 @@ class LinkedListTabulatedFunctionTest {
         assertEquals(function, clonedFunction);
         assertNotSame(function, clonedFunction);
     }
+
+    @Test
+    void testToStringNode() {
+        double tempX = 1.5;
+        double tempY = 3.2;
+
+        LinkedListTabulatedFunction.Node test = new LinkedListTabulatedFunction.Node(tempX, tempY);
+        assertEquals("(1.5 ; 3.2)", test.toString());
+    }
+
+    @Test
+    void testEqualsNode() {
+        double tempX = 3.5;
+        double tempY = 6.1;
+
+        LinkedListTabulatedFunction.Node test1 = new LinkedListTabulatedFunction.Node(tempX, tempY);
+        LinkedListTabulatedFunction.Node test2 = new LinkedListTabulatedFunction.Node(tempX, tempY);
+        LinkedListTabulatedFunction.Node test3 = new LinkedListTabulatedFunction.Node(0, 0);
+        assertEquals(true, test1.equals(test2));
+        assertEquals(false, test1.equals(test3));
+    }
+
+    @Test
+    void testHashCodeNode() {
+        double tempX = 1.5;
+        double tempY = 3.2;
+
+        LinkedListTabulatedFunction.Node test = new LinkedListTabulatedFunction.Node(tempX, tempY);
+        assertEquals(2, test.hashCode());
+    }
+
+    @Test
+    void testCloneNode() {
+        double tempX = 1.5;
+        double tempY = 3.2;
+
+        LinkedListTabulatedFunction.Node test = new LinkedListTabulatedFunction.Node(tempX, tempY);
+        LinkedListTabulatedFunction.Node result = test.clone();
+        assertEquals(result, test);
+        assertNotSame(result, test);
+    }
 }
