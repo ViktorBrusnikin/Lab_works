@@ -2,6 +2,8 @@ package ru.ssau.tk._viktor_._lab2_.functions;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArrayTabulatedFunctionTest {
@@ -225,4 +227,42 @@ class ArrayTabulatedFunctionTest {
 
         assertNotNull(function);
     }
+
+    @Test
+    void iterator1() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {2.0, 3.0, 6.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
+
+        Iterator<Point> iterator = function.iterator();
+        int count = 0;
+
+        while (iterator.hasNext()) {
+            Point point = iterator.next();
+            assertNotNull(point);
+            count++;
+        }
+
+        assertEquals(3, count);
+    }
+
+    @Test
+    void iterator2() {
+        double[] xValues = {1.0, 2.0, 3.0};
+        double[] yValues = {2.0, 3.0, 6.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
+
+        Iterator<Point> iterator = function.iterator();
+        int count = 0;
+        for (Point point : function){
+            point = iterator.next();
+            assertNotNull(point);
+            count++;
+        }
+
+        assertEquals(3, count);
+    }
+
 }
+
+

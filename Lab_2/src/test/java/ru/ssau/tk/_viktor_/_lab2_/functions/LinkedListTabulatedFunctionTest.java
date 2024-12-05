@@ -294,7 +294,7 @@ class LinkedListTabulatedFunctionTest {
 
 
     @Test
-    void iterator() {
+    void iterator1() {
         double[] xValues = {1.0, 2.0, 3.0};
         double[] yValues = {2.0, 3.0, 6.0};
         LinkedListTabulatedFunction function = new LinkedListTabulatedFunction(xValues, yValues);

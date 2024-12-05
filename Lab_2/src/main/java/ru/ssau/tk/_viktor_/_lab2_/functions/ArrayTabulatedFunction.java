@@ -5,8 +5,9 @@ import ru.ssau.tk._viktor_._lab2_.exceptions.InterpolationException;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implements Cloneable {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable {
 
     private double[] xValues;
     private double[] yValues;
@@ -199,6 +200,23 @@ public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implement
 
     @Override
     public Iterator<Point> iterator() {
-        throw new UnsupportedOperationException();
+        return new Iterator<Point>() {
+            private int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index < count;
+            }
+
+            @Override
+            public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                Point point = new Point(xValues[index], yValues[index]);
+                index++;
+                return point;
+            }
+        };
     }
 }
