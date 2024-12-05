@@ -2,6 +2,8 @@ package ru.ssau.tk._viktor_._lab2_.functions;
 
 import ru.ssau.tk._viktor_._lab2_.exceptions.InterpolationException;
 
+import java.util.Iterator;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
     private Node head;
 
@@ -280,5 +282,10 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         }
 
         return new LinkedListTabulatedFunction(xVal, yVal);
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
     }
 }

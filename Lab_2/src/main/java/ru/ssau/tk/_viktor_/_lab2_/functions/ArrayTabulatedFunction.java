@@ -4,6 +4,7 @@ package ru.ssau.tk._viktor_._lab2_.functions;
 import ru.ssau.tk._viktor_._lab2_.exceptions.InterpolationException;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implements Cloneable {
 
@@ -194,5 +195,10 @@ public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implement
         }
         ArrayTabulatedFunction result = new ArrayTabulatedFunction(xVal, yVal);
         return result;
+    }
+
+    @Override
+    public Iterator<Point> iterator() {
+        throw new UnsupportedOperationException();
     }
 }
