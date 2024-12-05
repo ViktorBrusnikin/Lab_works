@@ -38,11 +38,15 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues){
+        if(xValues.length < 2 || yValues.length < 2) throw new IllegalArgumentException("Нужно хотя бы 2 точки");
         for(int i = 0; i < xValues.length; i++){
             addNode(xValues[i], yValues[i]);
         }
     }
     public LinkedListTabulatedFunction(MathFunction source, double xFrom, double xTo, int count) {
+        if (count < 2) {
+            throw new IllegalArgumentException("Нужно хотя бы 2 точки");
+        }
         if (xTo < xFrom) {
             double temp = xTo;
             xTo = xFrom;
@@ -79,6 +83,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     private Node getNode(int index){
+        if (index < 0) throw new IllegalArgumentException("Индекс не может быть отрицательным!");
         Node cur = head;
         if(index > count/2){
             int newIndex = count - index;
@@ -102,7 +107,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         else {
             Node cur = head;
             if (x < head.x) {
-                return 0;
+                throw new IllegalArgumentException();
             }
             if(x > head.prev.x){
                 return count;
@@ -118,19 +123,16 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     protected double extrapolateLeft(double x) {
-        if(count == 1) return getY(0);
         return interpolate(x, 0);
     }
 
     @Override
     protected double extrapolateRight(double x) {
-        if(count == 1) return getY(0);
         return interpolate(x, count-2);
     }
 
     @Override
     protected double interpolate(double x, int floorIndex) {
-        if(count == 1) return getY(0);
         Node leftNode = getNode(floorIndex);
         Node rightNode = leftNode.next;
         return interpolate(x, leftNode.x, rightNode.x, leftNode.y, rightNode.y);

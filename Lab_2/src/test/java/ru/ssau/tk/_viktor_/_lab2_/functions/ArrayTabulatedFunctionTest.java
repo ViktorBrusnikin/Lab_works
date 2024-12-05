@@ -24,6 +24,18 @@ class ArrayTabulatedFunctionTest {
     }
 
     @Test
+    void floorIndexOfXException() {
+        double[] xArr = {0.0, 1.2, 4.0};
+        double[] yArr = {0.0, 4.3, 1.0};
+        try {
+            ArrayTabulatedFunction func = new ArrayTabulatedFunction(xArr, yArr);
+            func.floorIndexOfX(-3.0);
+            fail("Ожидалось исключение IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+        }
+    }
+
+    @Test
     void extrapolateLeft() {
         double[] xArr = {0.0, 1.0, 4.0};
         double[] yArr = {0.0, 4.0, 1.0};
@@ -169,5 +181,48 @@ class ArrayTabulatedFunctionTest {
 
         assertEquals(function, clonedFunction);
         assertNotSame(function, clonedFunction);
+    }
+
+    @Test
+    public void testXValuesLessThanTwo() {
+        double[] xValues = {1.0};
+        double[] yValues = {2.0, 3.0};
+        try {
+            new ArrayTabulatedFunction(xValues, yValues);
+            fail("Ожидалось исключение IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+        }
+    }
+
+    @Test
+    public void testYValuesLessThanTwo() {
+        // Arrange
+        double[] xValues = {1.0, 2.0};
+        double[] yValues = {2.0};
+        try {
+            new ArrayTabulatedFunction(xValues, yValues);
+            fail("Ожидалось исключение IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+        }
+    }
+
+    @Test
+    public void testBothValuesLessThanTwo() {
+        double[] xValues = {1.0};
+        double[] yValues = {2.0};
+        try {
+            new ArrayTabulatedFunction(xValues, yValues);
+            fail("Ожидалось исключение IllegalArgumentException");
+        } catch (IllegalArgumentException e) {
+        }
+    }
+
+    @Test
+    public void testValidInput() {
+        double[] xValues = {1.0, 2.0};
+        double[] yValues = {2.0, 3.0};
+        ArrayTabulatedFunction function = new ArrayTabulatedFunction(xValues, yValues);
+
+        assertNotNull(function);
     }
 }

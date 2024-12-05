@@ -9,6 +9,7 @@ public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implement
     private double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues){
+        if(xValues.length < 2 || yValues.length < 2) throw new IllegalArgumentException("Нужно хотя бы 2 точки");
         this.xValues = Arrays.copyOf(xValues, xValues.length);
         this.yValues = Arrays.copyOf(yValues, yValues.length);
         count = xValues.length;
@@ -47,7 +48,7 @@ public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implement
         if(indexOfX(x) != -1) return indexOfX(x);
 
         if (x <= xValues[0]) {
-            return 0;
+            throw new IllegalArgumentException();
         }
 
         if (x >= xValues[count - 1]) {
@@ -79,16 +80,19 @@ public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implement
 
     @Override
     public double getX(int index) {
+        if (index < 0) throw new IllegalArgumentException("Индекс не может быть отрицательным!");
         return xValues[index];
     }
 
     @Override
     public double getY(int index) {
+        if (index < 0) throw new IllegalArgumentException("Индекс не может быть отрицательным!");
         return yValues[index];
     }
 
     @Override
     public void setY(int index, double value) {
+        if (index < 0) throw new IllegalArgumentException("Индекс не может быть отрицательным!");
         yValues[index] = value;
     }
 
@@ -161,7 +165,7 @@ public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implement
     }
 
     @Override
-    public ArrayTabulatedFunction  clone(){
+    public ArrayTabulatedFunction clone(){
         double[] xVal = new double[count];
         double[] yVal = new double[count];
         for (int i = 0; i < count; i++){
