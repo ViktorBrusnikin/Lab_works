@@ -3,6 +3,7 @@ package ru.ssau.tk._viktor_._lab2_.functions;
 import ru.ssau.tk._viktor_._lab2_.exceptions.InterpolationException;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
     private Node head;
@@ -286,6 +287,25 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     public Iterator<Point> iterator() {
-        throw new UnsupportedOperationException();
+        return new Iterator<Point>() {
+            private Node node = head;
+            private boolean firstIteration = true;
+
+            @Override
+            public boolean hasNext() {
+                return (firstIteration || node != head);
+            }
+
+            @Override
+            public Point next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                Point point = new Point(node.x, node.y);
+                node = node.next;
+                firstIteration = false;
+                return point;
+            }
+        };
     }
 }
