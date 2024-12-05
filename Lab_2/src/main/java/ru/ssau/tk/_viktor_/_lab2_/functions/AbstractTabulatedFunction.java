@@ -1,5 +1,9 @@
 package ru.ssau.tk._viktor_._lab2_.functions;
 
+
+import ru.ssau.tk._viktor_._lab2_.exceptions.ArrayIsNotSortedException;
+import ru.ssau.tk._viktor_._lab2_.exceptions.DifferentLengthOfArraysException;
+
 public abstract class AbstractTabulatedFunction implements TabulatedFunction{
 
     protected int count;
@@ -33,4 +37,17 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction{
         }
     }
 
+    static void checkLengthIsTheSame(double[] xValues, double[] yValues){
+        if(xValues.length != yValues.length){
+            throw new DifferentLengthOfArraysException("Длины массивов xValues и yValues не совпадают.");
+        }
+    }
+
+    static void checkSorted(double[] xValues){
+        for (int i = 0; i < xValues.length-1; i++){
+            if(xValues[i] > xValues[i+1]){
+                throw new ArrayIsNotSortedException("Массив xValues должен быть отсортирован по возрастанию.");
+            }
+        }
+    }
 }

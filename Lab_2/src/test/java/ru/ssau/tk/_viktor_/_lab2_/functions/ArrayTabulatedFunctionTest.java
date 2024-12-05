@@ -61,8 +61,8 @@ class ArrayTabulatedFunctionTest {
         double[] yArr = {0.0, 4.0, 1.0};
         ArrayTabulatedFunction testArr= new ArrayTabulatedFunction(xArr, yArr);
 
-        double result = testArr.interpolate(-1.0, 1);
-        assertEquals(6.0, result, 1e-9);
+        double result = testArr.interpolate(2.0, 1);
+        assertEquals(3.0, result, 1e-9);
     }
 
     @Test

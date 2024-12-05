@@ -1,5 +1,7 @@
 package ru.ssau.tk._viktor_._lab2_.functions;
 
+import ru.ssau.tk._viktor_._lab2_.exceptions.InterpolationException;
+
 public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
     private Node head;
 
@@ -38,7 +40,18 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     }
 
     public LinkedListTabulatedFunction(double[] xValues, double[] yValues){
-        if(xValues.length < 2 || yValues.length < 2) throw new IllegalArgumentException("Нужно хотя бы 2 точки");
+        if (xValues == null || yValues == null) {
+            throw new IllegalArgumentException("Массивы не должны быть null.");
+        }
+
+        if (xValues.length < 2 || yValues.length < 2) {
+            throw new IllegalArgumentException("Нужно хотя бы 2 точки");
+        }
+
+        checkLengthIsTheSame(xValues, yValues);
+
+        checkSorted(xValues);
+
         for(int i = 0; i < xValues.length; i++){
             addNode(xValues[i], yValues[i]);
         }
@@ -123,18 +136,25 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
     @Override
     protected double extrapolateLeft(double x) {
-        return interpolate(x, 0);
+        Node leftNode = getNode(0);
+        Node rightNode = leftNode.next;
+        return interpolate(x, leftNode.x, rightNode.x, leftNode.y, rightNode.y);
     }
 
     @Override
     protected double extrapolateRight(double x) {
-        return interpolate(x, count-2);
+        Node leftNode = getNode(count-2);
+        Node rightNode = leftNode.next;
+        return interpolate(x, leftNode.x, rightNode.x, leftNode.y, rightNode.y);
     }
 
     @Override
     protected double interpolate(double x, int floorIndex) {
         Node leftNode = getNode(floorIndex);
         Node rightNode = leftNode.next;
+        if (x < leftNode.x || x > rightNode.x) {
+            throw new InterpolationException("Значение x находится вне интервала интерполяции.");
+        }
         return interpolate(x, leftNode.x, rightNode.x, leftNode.y, rightNode.y);
     }
 

@@ -1,6 +1,8 @@
 package ru.ssau.tk._viktor_._lab2_.functions;
 
 
+import ru.ssau.tk._viktor_._lab2_.exceptions.InterpolationException;
+
 import java.util.Arrays;
 
 public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implements Cloneable {
@@ -9,7 +11,18 @@ public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implement
     private double[] yValues;
 
     public ArrayTabulatedFunction(double[] xValues, double[] yValues){
-        if(xValues.length < 2 || yValues.length < 2) throw new IllegalArgumentException("Нужно хотя бы 2 точки");
+        if (xValues == null || yValues == null) {
+            throw new IllegalArgumentException("Массивы не должны быть null.");
+        }
+
+        if (xValues.length < 2 || yValues.length < 2) {
+            throw new IllegalArgumentException("Нужно хотя бы 2 точки");
+        }
+
+        checkLengthIsTheSame(xValues, yValues);
+
+        checkSorted(xValues);
+
         this.xValues = Arrays.copyOf(xValues, xValues.length);
         this.yValues = Arrays.copyOf(yValues, yValues.length);
         count = xValues.length;
@@ -65,17 +78,24 @@ public class ArrayTabulatedFunction  extends AbstractTabulatedFunction implement
 
     @Override
     protected double extrapolateLeft(double x) {
-        return interpolate(x, 0);
+        return interpolate(x, xValues[0], xValues[1], yValues[0], yValues[1]);
     }
 
     @Override
     protected double extrapolateRight(double x) {
-        return interpolate(x, count-2);
+        return interpolate(x, xValues[count - 2], xValues[count - 1], yValues[count - 2], yValues[count - 1]);
     }
 
     @Override
-    protected double interpolate(double x, int floorIndex) {
-        return interpolate(x, xValues[floorIndex], xValues[floorIndex+ 1], yValues[floorIndex], yValues[floorIndex+1]);
+    protected double interpolate(double x, int floorIndex){
+        double leftX = xValues[floorIndex];
+        double rightX = xValues[floorIndex + 1];
+
+        if (x < leftX || x > rightX) {
+            throw new InterpolationException("Значение x находится вне интервала интерполяции.");
+        }
+
+        return interpolate(x, leftX, rightX, yValues[floorIndex], yValues[floorIndex + 1]);
     }
 
     @Override
