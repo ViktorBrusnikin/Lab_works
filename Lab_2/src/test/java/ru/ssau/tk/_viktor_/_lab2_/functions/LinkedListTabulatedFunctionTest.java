@@ -163,7 +163,7 @@ class LinkedListTabulatedFunctionTest {
         double[] yArr = {3.0, 4.0, 5.0};
         LinkedListTabulatedFunction test = new LinkedListTabulatedFunction(xArr, yArr);
 
-        assertEquals("[ (0.0 ; 3.0), (1.0 ; 4.0), (2.0 ; 5.0) ]", test.toString());
+        assertEquals("[(0.0; 3.0), (1.0; 4.0), (2.0; 5.0)]", test.toString());
     }
 
     @Test
@@ -214,7 +214,7 @@ class LinkedListTabulatedFunctionTest {
         double tempY = 3.2;
 
         LinkedListTabulatedFunction.Node test = new LinkedListTabulatedFunction.Node(tempX, tempY);
-        assertEquals("(1.5 ; 3.2)", test.toString());
+        assertEquals("(1.5; 3.2)", test.toString());
     }
 
     @Test

@@ -31,4 +31,23 @@ class AbstractTabulatedFunctionTest {
         } catch (ArrayIsNotSortedException e) {
         }
     }
+
+    @Test
+    void testToStringArr() {
+        double[] xArr = {0.0, 1.0, 2.0};
+        double[] yArr = {3.0, 4.0, 5.0};
+        AbstractTabulatedFunction testArr= new ArrayTabulatedFunction(xArr, yArr);
+
+        assertEquals("[(0.0; 3.0), (1.0; 4.0), (2.0; 5.0)]", testArr.toString());
+    }
+
+    @Test
+    void testToStringList() {
+        double[] xArr = {0.0, 1.0, 2.0};
+        double[] yArr = {3.0, 4.0, 5.0};
+        AbstractTabulatedFunction testList= new LinkedListTabulatedFunction(xArr, yArr);
+
+        assertEquals("[(0.0; 3.0), (1.0; 4.0), (2.0; 5.0)]", testList.toString());
+    }
+
 }

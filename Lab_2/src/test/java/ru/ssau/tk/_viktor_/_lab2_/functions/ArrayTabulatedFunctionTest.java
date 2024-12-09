@@ -140,7 +140,7 @@ class ArrayTabulatedFunctionTest {
         double[] yArr = {3.0, 4.0, 5.0};
         ArrayTabulatedFunction testArr= new ArrayTabulatedFunction(xArr, yArr);
 
-        assertEquals("[ (0.0 ; 3.0), (1.0 ; 4.0), (2.0 ; 5.0) ]", testArr.toString());
+        assertEquals("[(0.0; 3.0), (1.0; 4.0), (2.0; 5.0)]", testArr.toString());
     }
 
     @Test

@@ -150,14 +150,14 @@ public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements
         if(count == 0){
             return "[]";
         }
-        res += "[ ";
+        res += "[";
         for (int i = 0; i < count; i++){
-            res += "(" + xValues[i] + " ; " + yValues[i] + ")";
+            res += "(" + xValues[i] + "; " + yValues[i] + ")";
             if (i < count - 1) {
                 res += ", ";
             }
         }
-        res += " ]";
+        res += "]";
         return res;
     }
 

@@ -4,6 +4,7 @@ package ru.ssau.tk._viktor_._lab2_.functions;
 import ru.ssau.tk._viktor_._lab2_.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk._viktor_._lab2_.exceptions.DifferentLengthOfArraysException;
 
+
 public abstract class AbstractTabulatedFunction implements TabulatedFunction{
 
     protected int count;
@@ -50,4 +51,14 @@ public abstract class AbstractTabulatedFunction implements TabulatedFunction{
             }
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(getClass().getSimpleName() + " size = " + this.count + "\n");
+        for (Point point : this) {
+            sb.append("[").append(point.x).append("; ").append(point.y).append("]\n");
+        }
+        return sb.toString();
+    }
+
 }

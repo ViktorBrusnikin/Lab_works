@@ -20,7 +20,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
 
         @Override
         public String toString(){
-            return "(" + this.x + " ; " + this.y + ")";
+            return "(" + this.x + "; " + this.y + ")";
         }
 
         @Override
@@ -224,7 +224,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
         if (cur == null) {
             return "[]";
         }
-        res += "[ ";
+        res += "[";
         do {
             res += cur.toString();
             cur = cur.next;
@@ -232,7 +232,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
                 res += ", ";
             }
         } while (cur != head);
-        res += " ]";
+        res += "]";
         return res;
     }
 
