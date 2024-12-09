@@ -1,8 +1,12 @@
 package ru.ssau.tk._viktor_._lab2_.io;
 
 import ru.ssau.tk._viktor_._lab2_.functions.TabulatedFunction;
+import ru.ssau.tk._viktor_._lab2_.functions.factory.TabulatedFunctionFactory;
 
 import java.io.*;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 public final class FunctionsIO {
 
@@ -36,5 +40,32 @@ public final class FunctionsIO {
         }
 
         dataOutputStream.flush();
+    }
+
+    public static TabulatedFunction readTabulatedFunction(BufferedReader reader, TabulatedFunctionFactory factory) throws IOException {
+        try {
+            int count = Integer.parseInt(reader.readLine());
+
+            double[] xValues = new double[count];
+            double[] yValues = new double[count];
+
+            NumberFormat numberFormatter = NumberFormat.getInstance(Locale.forLanguageTag("ru"));
+            for (int i = 0; i < count; i++) {
+                String line = reader.readLine();
+                String[] parts = line.split(" ");
+
+                try {
+                    xValues[i] = numberFormatter.parse(parts[0]).doubleValue();
+                    yValues[i] = numberFormatter.parse(parts[1]).doubleValue();
+                } catch (ParseException e) {
+                    throw new IOException();
+                }
+            }
+            return factory.create(xValues, yValues);
+        } catch (IOException ex) {
+            throw ex;
+        } catch (NumberFormatException e) {
+            throw new IOException();
+        }
     }
 }
