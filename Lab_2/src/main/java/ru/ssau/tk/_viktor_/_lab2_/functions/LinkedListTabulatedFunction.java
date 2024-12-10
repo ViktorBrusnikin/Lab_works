@@ -13,7 +13,7 @@ public class LinkedListTabulatedFunction extends AbstractTabulatedFunction imple
     
     private Node head;
 
-    static class Node implements Cloneable{
+    static class Node implements Cloneable, Serializable{
         public Node next;
         public Node prev;
         public double x;
