@@ -4,8 +4,14 @@ package ru.ssau.tk._viktor_._lab2_.functions;
 import ru.ssau.tk._viktor_._lab2_.exceptions.ArrayIsNotSortedException;
 import ru.ssau.tk._viktor_._lab2_.exceptions.DifferentLengthOfArraysException;
 
+import java.io.Serial;
+import java.io.Serializable;
 
-public abstract class AbstractTabulatedFunction implements TabulatedFunction{
+
+public abstract class AbstractTabulatedFunction implements TabulatedFunction, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -2712461524994405844L;
 
     protected int count;
 
