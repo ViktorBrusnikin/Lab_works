@@ -1,11 +1,16 @@
 package ru.ssau.tk._viktor_._lab2_.functions;
 
 import ru.ssau.tk._viktor_._lab2_.exceptions.InterpolationException;
-
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Cloneable{
+public class LinkedListTabulatedFunction extends AbstractTabulatedFunction implements Cloneable, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -7260375779537011916L;
+    
     private Node head;
 
     static class Node implements Cloneable{
