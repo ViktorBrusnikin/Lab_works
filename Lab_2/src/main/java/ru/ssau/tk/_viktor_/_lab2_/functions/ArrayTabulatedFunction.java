@@ -3,11 +3,16 @@ package ru.ssau.tk._viktor_._lab2_.functions;
 
 import ru.ssau.tk._viktor_._lab2_.exceptions.InterpolationException;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable {
+public class ArrayTabulatedFunction extends AbstractTabulatedFunction implements Cloneable, Serializable {
+
+    @Serial
+    private static final long serialVersionUID = -7265254573057537321L;
 
     private double[] xValues;
     private double[] yValues;
