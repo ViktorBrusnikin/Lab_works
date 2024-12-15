@@ -15,6 +15,6 @@ public class MultiplyingTask implements Runnable{
         for(int i = 0; i < tabulatedFunction.getCount(); i++){
             this.tabulatedFunction.setY(i, this.tabulatedFunction.getY(i)*2);
         }
-        System.out.println("Текущий поток " + Thread.currentThread().getName() + " закончил своё выполнение.");
+        System.out.println("Текущий поток: " + Thread.currentThread().getName() + " закончил своё выполнение.");
     }
 }
