@@ -13,9 +13,11 @@ public class WriteTask implements Runnable{
 
     @Override
     public void run() {
-        for (int i = 0; i < tabulatedFunction.getCount(); i++){
-            this.tabulatedFunction.setY(i, this.value);
-            System.out.printf("Writing for index %d complete%n", i);
+        for (int i = 0; i < tabulatedFunction.getCount(); i++) {
+            synchronized (tabulatedFunction) {
+                this.tabulatedFunction.setY(i, this.value);
+                System.out.printf("Writing for index %d complete%n", i);
+            }
         }
     }
 }
