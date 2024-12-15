@@ -3,7 +3,7 @@ package ru.ssau.tk._viktor_._lab2_.concurrent;
 import ru.ssau.tk._viktor_._lab2_.functions.TabulatedFunction;
 
 public class ReadTask implements Runnable{
-    private TabulatedFunction tabulatedFunction;
+    private final TabulatedFunction tabulatedFunction;
 
     ReadTask(TabulatedFunction tabulatedFunction){
         this.tabulatedFunction = tabulatedFunction;
