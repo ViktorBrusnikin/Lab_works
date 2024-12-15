@@ -4,7 +4,7 @@ import ru.ssau.tk._viktor_._lab2_.functions.TabulatedFunction;
 
 public class MultiplyingTask implements Runnable{
 
-    private TabulatedFunction tabulatedFunction;
+    private final TabulatedFunction tabulatedFunction;
 
     MultiplyingTask(TabulatedFunction tabulatedFunction){
         this.tabulatedFunction = tabulatedFunction;
@@ -12,8 +12,10 @@ public class MultiplyingTask implements Runnable{
 
     @Override
     public void run() {
-        for(int i = 0; i < tabulatedFunction.getCount(); i++){
-            this.tabulatedFunction.setY(i, this.tabulatedFunction.getY(i)*2);
+        for(int i = 0; i < tabulatedFunction.getCount(); i++) {
+            synchronized (tabulatedFunction) {
+                this.tabulatedFunction.setY(i, this.tabulatedFunction.getY(i) * 2);
+            }
         }
         System.out.println("Текущий поток: " + Thread.currentThread().getName() + " закончил своё выполнение.");
     }
