@@ -2,6 +2,7 @@ package ru.ssau.tk._viktor_._lab2_.concurrent;
 
 import ru.ssau.tk._viktor_._lab2_.functions.Point;
 import ru.ssau.tk._viktor_._lab2_.functions.TabulatedFunction;
+import ru.ssau.tk._viktor_._lab2_.operations.TabulatedFunctionOperationService;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -80,14 +81,14 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
     @Override
     public Iterator<Point> iterator() {
         synchronized (tabulatedFunction) {
-            int count = tabulatedFunction.getCount();
+            Point[] points = TabulatedFunctionOperationService.asPoints(tabulatedFunction);
 
             return new Iterator<Point>() {
                 private int i = 0;
 
                 @Override
                 public boolean hasNext() {
-                    return i < count;
+                    return i < points.length;
                 }
 
                 @Override
@@ -95,10 +96,7 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
                     if (!hasNext()) {
                         throw new NoSuchElementException();
                     }
-                    double x = tabulatedFunction.getX(i);
-                    double y = tabulatedFunction.getY(i);
-                    i++;
-                    return new Point(x, y);
+                    return points[i++];
                 }
             };
         }
