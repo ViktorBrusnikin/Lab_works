@@ -11,7 +11,7 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
 
     private final TabulatedFunction tabulatedFunction;
 
-    SynchronizedTabulatedFunction(TabulatedFunction tabulatedFunction){
+    SynchronizedTabulatedFunction(TabulatedFunction tabulatedFunction) {
         this.tabulatedFunction = tabulatedFunction;
     }
 
@@ -100,5 +100,16 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
                 }
             };
         }
+    }
+
+    public interface Operation<T> {
+        T apply(SynchronizedTabulatedFunction function);
+    }
+
+    public <T> T doSynchronously(Operation<T> operation) {
+        synchronized (this.tabulatedFunction) {
+            return operation.apply(this);
+        }
+
     }
 }

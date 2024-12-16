@@ -82,4 +82,23 @@ class SynchronizedTabulatedFunctionTest {
         assertEquals(4.0, iterator.next().x);
         assertFalse(iterator.hasNext());
     }
+
+    @Test
+    public void testDoSynchronously1() {
+        SynchronizedTabulatedFunction.Operation<Integer> intOperation = (function) -> 234;
+        Integer result = synFunc.doSynchronously(intOperation);
+        assertEquals(234, result);
+    }
+    @Test
+    public void testDoSynchronously2() {
+        SynchronizedTabulatedFunction.Operation<String> stringOperation = (function) -> "hello world";
+        String result = synFunc.doSynchronously(stringOperation);
+        assertEquals("hello world", result);
+    }
+    @Test
+    public void testDoSynchronously3() {
+        SynchronizedTabulatedFunction.Operation<Double> doubleOperation = (function) -> 2.718281;
+        Double result = synFunc.doSynchronously(doubleOperation);
+        assertEquals(2.718281, result, 0.000001);
+    }
 }
