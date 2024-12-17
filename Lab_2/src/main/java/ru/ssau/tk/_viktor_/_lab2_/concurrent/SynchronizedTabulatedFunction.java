@@ -11,7 +11,7 @@ public class SynchronizedTabulatedFunction implements TabulatedFunction {
 
     private final TabulatedFunction tabulatedFunction;
 
-    SynchronizedTabulatedFunction(TabulatedFunction tabulatedFunction) {
+    public SynchronizedTabulatedFunction(TabulatedFunction tabulatedFunction) {
         this.tabulatedFunction = tabulatedFunction;
     }
 

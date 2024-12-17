@@ -3,6 +3,7 @@ package ru.ssau.tk._viktor_._lab2_.operations;
 import org.junit.jupiter.api.Test;
 import ru.ssau.tk._viktor_._lab2_.functions.ArrayTabulatedFunction;
 import ru.ssau.tk._viktor_._lab2_.functions.LinkedListTabulatedFunction;
+import ru.ssau.tk._viktor_._lab2_.functions.SqrFunction;
 import ru.ssau.tk._viktor_._lab2_.functions.TabulatedFunction;
 import ru.ssau.tk._viktor_._lab2_.functions.factory.ArrayTabulatedFunctionFactory;
 import ru.ssau.tk._viktor_._lab2_.functions.factory.LinkedListTabulatedFunctionFactory;
@@ -11,13 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 class TabulatedDifferentialOperatorTest {
 
     @Test
-    void testConstructor1(){
+    void testConstructor1() {
         TabulatedDifferentialOperator operator = new TabulatedDifferentialOperator(new LinkedListTabulatedFunctionFactory());
         assertInstanceOf(LinkedListTabulatedFunctionFactory.class, operator.getFactory());
     }
 
     @Test
-    void testConstructor2(){
+    void testConstructor2() {
         TabulatedDifferentialOperator operator = new TabulatedDifferentialOperator();
         assertInstanceOf(ArrayTabulatedFunctionFactory.class, operator.getFactory());
     }
@@ -57,4 +58,12 @@ class TabulatedDifferentialOperatorTest {
         }
     }
 
+    @Test
+    void deriveSynchronously() {
+        TabulatedFunction tabulatedFunction = new LinkedListTabulatedFunction(new double[]{-3, 1.5, 6, 10.5, 15}, new double[]{9, 2.25, 36, 110.25, 225});
+        TabulatedDifferentialOperator differentialOperator = new TabulatedDifferentialOperator(new LinkedListTabulatedFunctionFactory());
+        TabulatedFunction derivedFunction = differentialOperator.deriveSynchronously(tabulatedFunction);
+
+        assertEquals(16.5, derivedFunction.apply(6), 0.01);
+    }
 }

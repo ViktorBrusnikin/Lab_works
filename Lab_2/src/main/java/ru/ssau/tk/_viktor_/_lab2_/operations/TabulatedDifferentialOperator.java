@@ -1,5 +1,6 @@
 package ru.ssau.tk._viktor_._lab2_.operations;
 
+import ru.ssau.tk._viktor_._lab2_.concurrent.SynchronizedTabulatedFunction;
 import ru.ssau.tk._viktor_._lab2_.functions.Point;
 import ru.ssau.tk._viktor_._lab2_.functions.TabulatedFunction;
 import ru.ssau.tk._viktor_._lab2_.functions.factory.ArrayTabulatedFunctionFactory;
@@ -41,6 +42,18 @@ public class TabulatedDifferentialOperator implements DifferentialOperator<Tabul
         yValues[size - 1] = (points[size - 1].y - points[size - 2].y) / (points[size - 1].x - points[size - 2].x);
 
         return factory.create(xValues, yValues);
+    }
+    
+
+    public TabulatedFunction deriveSynchronously(TabulatedFunction function) {
+        SynchronizedTabulatedFunction synchronizedFunction;
+        if (function instanceof SynchronizedTabulatedFunction) {
+            synchronizedFunction = (SynchronizedTabulatedFunction) function;
+        } else {
+            synchronizedFunction = new SynchronizedTabulatedFunction(function);
+        }
+
+        return synchronizedFunction.doSynchronously(_ ->derive(function));
     }
 
     @Override
