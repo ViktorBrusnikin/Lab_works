@@ -38,13 +38,13 @@ public class ChooseFactory extends JDialog {
 
         gradientPanel.setLayout(new GridLayout(2, 1, 10, 10)); // Две строки, равномерное распределение и отступы
 
-        RoundedButton arrayFactoryButton = new RoundedButton("Фабрика 1 (массив)", new Color(129, 156, 110), new Color(54, 85, 54));
+        RoundedButton arrayFactoryButton = new RoundedButton("Массив", new Color(129, 156, 110), new Color(54, 85, 54));
         arrayFactoryButton.addActionListener(_ -> {
             factoryService.FactorySet(new ArrayTabulatedFunctionFactory());
             dispose();
         });
 
-        RoundedButton listFactoryButton = new RoundedButton("Фабрика 2 (связный список)", new Color(129, 156, 110), new Color(54, 85, 54));
+        RoundedButton listFactoryButton = new RoundedButton("Связный список", new Color(129, 156, 110), new Color(54, 85, 54));
         listFactoryButton.addActionListener(_ -> {
             factoryService.FactorySet(new LinkedListTabulatedFunctionFactory());
             dispose();
